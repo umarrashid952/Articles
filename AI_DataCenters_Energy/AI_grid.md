@@ -62,17 +62,26 @@ The impacts of AI data center load is broadly divided among three phases dependi
 <center><img src="Image_2_a.png" alt="drawing" width="600"/></center>
 <center>Figure 3: Three timescales of grid impact from AI</center>
 
-### 3.1 Long-Term Planning
+### 3.1 Long-Term Planning (Years)
 
 Over a long-term horizon, the challenge faced by utilities and regulators is how to build new grid infrastructure to serve ever-expanding AI data centers. Large AI infrastructure developers employ two practical responses to meet this challenge.
 
 - **Coordinated Planning:** Parallel installation of a working data center with exapnsion of transmission capacity and addition of new generation from the utility companies.
 - **Co-location with Dedicated Generation:** Major companies like Amazon made agreement to source nuclear power directly from a Pennsylvania plant. Similarly, Google's partnership with Kairos Power to deploy small modular reactors adjacent to its facilities is an example of co-located AI data centers with dedicated generation. 
 
-### 3.2 Short-Term Operations
+### 3.2 Short-Term Operations (Days/Weeks)
 
 Over weekly grid operations, AI loads complicate the balance of electricity supply and demand. AI loads consisting of training and inference tasks make the process of load forecasting difficult. This forces operators to hold larger reserve margins at higher cost. An emerging solution is that operators contractually agree to curtail or shift AI workloads during periods of system stress in exchange for compensation. 
 
-### 3.3 Real-Time Dynamics and Grid Stability
+### 3.3 Real-Time Dynamics and Grid Stability (Seconds)
 
-In the operational regime of grids bearing AI large load, the focus is primarily shifts to real-time dynamics of electricity consumption and physical stability. As shown in Figure 1, AI facilities connect through power electronic converters which are highly sensitive to brief voltage sags or frequency deviations. This creates inadequate fault ride-through problem in which the data center is disconnecred from the grid temporarily. Emerging mitigations include firmware-level power ramping constraints on individual processors and rack-level battery storage to absorb fast swings  to ensure that AI facilities remain connected through brief disturbances rather than tripping offline.
+In the operational regime of grids bearing AI large load, the focus is primarily shifts to real-time dynamics of electricity consumption and physical stability. As shown in Figure 1, AI facilities connect through power electronic converters which are highly sensitive to brief voltage sags or frequency deviations. This creates inadequate fault ride-through problem in which the data center is disconnecred from the grid temporarily. Emerging mitigations include:
+- **Firmware-level power ramping:** Enforce gradual power changes at the processing units to avoid sudden load swings.
+- **Rack-level battery storage:** Use small on-site batteries to absorb fast fluctuations to smooth out out the spikes and dips before they reach the grid. 
+
+
+## 4. The Bottom Line
+
+The AI revolution is an electrical revolution and the trafitional grid wasn't built for it. From multi-year planning horizons to millisecond stability constraints, the power system is now a decisive factor in how fast AI can scale, how much it costs, and where it can be deployed.
+
+Solving this means rethinking everything: how we plan transmission, how we operate wholesale markets, and how we design data centers themselves. But one thing is certain: the future of AI will be shaped as much by transformers on utility poles as by transformers in neural networks.
