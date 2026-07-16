@@ -1,4 +1,12 @@
-# Power Grid Impacts of AI Data Centers and the Path to Grid Modernization
+---
+title: "Power Grid Impacts of AI Data Centers"
+slug: "power-grid-impacts-ai-data-centers"
+description: "An analysis of how the surging electricity demand of AI data centers, driven by high power density, load variability, and power quality challenges, is straining grid infrastructure across long-term planning, short-term operations, and real-time stability."
+category: "AI Infrastructure and Energy Policy"
+tags: "AI data centers, power grid, grid modernization, electricity demand, interconnection, load variability, grid stability, energy infrastructure"
+---
+
+# Power Grid Impacts of AI Data Centers
 
 Generative artificial intelligence (GenAI) has moved from a research cursoity to an industrial-scale consumer of electricity over the last two years. Training of frontend large language models typically draw tons to hudrends of GWh of electric energy in addtion to the around the clock operations of chatbots, coding assistants and corporate copilots at high power densities. These power levels were unimaginable in conventional data centers a decade ago. This article examines how that growth in AI data centers' energy requirements is straining the existing electric power grid infrastructure on account of stringent challenges posed by this recent interconnection of AI data centers and electric grid. This challenge is projected over three major timescales: multi-year long term planning, short term operations and real time monitoring. The bottom line is that power grid has now become a frontline constraint on largescale AI based productivity, deployment times and cost structures.  
 
@@ -35,24 +43,24 @@ Intensive AI workloads require power levels that are substantially more than the
 
 ### 2.2 Fast and large variability:
 
-There are normally three stages of an AI-based task: training, fine-tuning and inference. Acroos these phases, AI workloads can be highly variable and bursty, with power demand fluctuating sharply over very short timescales and remaining difficult to forecast. 
+There are normally three stages of an AI-based task: training, fine-tuning and inference. Across these phases, AI workloads can be highly variable and bursty, with power demand fluctuating sharply over very short timescales and remaining difficult to forecast. 
 - **Training stage:** The training stage is the most electricity
 intensive phase of AI development, particularly for LLMs. For example, training GPT-3 is estimated to have consumed 1.29 GWh of electricity. 
-- **Fine-tuning stage:** Fine-tuning stage adapts an arleady pre-trained model to a customized task. This stage typically requires substantially less computation and electricity than training from scratch.
+- **Fine-tuning stage:** Fine-tuning stage adapts an alrfeady pre-trained model to a customized task. This stage typically requires substantially less computation and electricity than training from scratch.
 - **Inference stage:** Inference is the process of executing a
 well-trained AI model to generate outputs in response to user
 inputs. On a per-query basis, it is the least electricity-intensive
 stage of the AI model lifecycle.
 
 <center><img src="Image_3.png" alt="drawing" width="600"/></center>
-<center>Figure 3: Patterns of AI computing load during training, fine-tuning, and inference stages</center>
+<center>Figure 2: Patterns of AI computing load during training, fine-tuning, and inference stages</center>
 
 ## 3. Three Timescales of Grid Impacts
 
-The impacts of AI data center load is boradly divided among three phases depending on the planning horizons. Each orizon calls for a different response.
+The impacts of AI data center load is broadly divided among three phases depending on the planning horizons. Each orizon calls for a different response.
 
 <center><img src="Image_2_a.png" alt="drawing" width="600"/></center>
-<center>Figure 2: Three timescales of grid impact from AI</center>
+<center>Figure 3: Three timescales of grid impact from AI</center>
 
 ### 3.1 Long-Term Planning
 
