@@ -1,3 +1,11 @@
+---
+title: "Cloud AI vs. Edge AI: Where Should Your Inference Actually Live?"
+slug: "cloud-ai-vs-edge-ai-where-inference-belongs"
+description: "A practical breakdown of when AI inference belongs in the cloud and when it belongs at the edge, with diagrams, real deployment examples, and a simple decision framework for technology teams."
+category: "AI Infrastructure"
+tags: "AI, Edge Computing, Cloud Computing, Machine Learning, Enterprise Technology"
+---
+
 # Cloud AI vs. Edge AI: Where Should Your Inference Actually Live?
 
 An intriguing question that remains hidden in a typical AI infrastructure is: once a model is trained, where does it actually run? For years the answer was assumed rather than debated. You shipped data to the cloud, a server somewhere did the thinking, and a result came back. That default is now cracking under its own weight.
