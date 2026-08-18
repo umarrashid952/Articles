@@ -38,8 +38,12 @@ At the scale of large language model training sets, which routinely exceed a tri
 
 Federated learning, where a model is trained collaboratively across many devices without any of them sharing raw data, adds its own version of this problem. Instead of poisoning a centralized dataset, a malicious participant poisons their local model update before it gets aggregated into the shared global model.
 
-![Model poisoning attack in a federated learning setting, showing a malicious participant injecting a corrupted gradient update into the shared global model](images/figure-3-federated-poisoning.jpg)
-*A malicious participant in a federated learning system can corrupt the shared global model by submitting a poisoned gradient update, without ever touching a centralized dataset or the other participants' data.*
+</br>
+
+<center><img src="images/figure-3-federated-poisoning.jpg" alt="drawing" width="450"/></center>
+<center>Figure 1: A malicious participant in a federated learning system can corrupt the shared global model by submitting a poisoned gradient update, without ever touching a centralized dataset or the other participants' data. </center>
+
+</br>
 
 ### Attacking the architecture
 
@@ -50,8 +54,6 @@ Neural networks carry structural weaknesses that exist independent of the data t
 The trained weights themselves are a third target. A parameter manipulation attack alters weights or biases directly, which can introduce targeted misclassification or a hidden backdoor activation channel without ever touching the training data or training code, and often without producing any observable change on standard test data.
 
 
-![Attack surface across AI model training, showing data poisoning, label flipping, backdoor injection, adversarial training attacks, model inversion, parameter manipulation, and hyperparameter tuning attacks](images/figure-1-training-phase.png)
-*The training phase carries the highest stakes in the AI lifecycle: whatever gets compromised here persists in the model and propagates to every downstream deployment.*
 
 ## Threats Across the Lifecycle
 
@@ -62,8 +64,13 @@ Training is the highest value target in the entire AI lifecycle, precisely becau
 Training infrastructure has its own version of model inversion, where an attacker with access to intermediate checkpoints reconstructs sensitive training data from the model's evolving parameters without ever touching the training set directly. Medical records, financial transactions, private communications: all of it can become partially recoverable from a model that was never supposed to expose it.
 
 
-![Data flow diagram showing how data poisoning and model training vulnerabilities propagate through to inference servers, resulting in corrupted classifications and privacy loss](images/figure-2-training-dataflow.jpg)
-*Corruption introduced during data collection or training does not stay isolated. It flows directly into the models that inference servers ultimately serve to production.*
+</br>
+
+<center><img src="images/figure-2-training-dataflow.jpg" alt="drawing" width="450"/></center>
+<center>Figure 2: Corruption introduced during data collection or training does not stay isolated. It flows directly into the models that inference servers ultimately serve to production. </center>
+
+</br>
+
 
 ### Phase two: Inference
 
@@ -73,8 +80,13 @@ Inference is where a model meets the outside world, and it is the most heavily s
 
 No complete defense against adversarial examples exists today, but several mitigations meaningfully raise the cost of an attack. Adversarial training augments the training set with adversarial examples so the model learns to resist them. Input preprocessing, JPEG compression, bit depth reduction, spatial smoothing, disrupts the precise pixel level manipulation that many attacks depend on. Differential privacy training, output confidence calibration, and output restriction round out the primary defenses, each trading off some accuracy or latency for robustness.
 
-![Inference phase attack surface, including adversarial evasion attacks, model extraction, membership inference, model inversion, and evasion of security filters](images/figure-4-inference-phase.jpg)
-*Once a model is serving live predictions, it is exposed to anyone who can send it an input, which is what makes inference the most extensively studied attack surface in adversarial machine learning.*
+</br>
+
+<center><img src="images/figure-4-inference-phase.jpg" alt="drawing" width="450"/></center>
+<center>Figure 3: Once a model is serving live predictions, it is exposed to anyone who can send it an input, which is what makes inference the most extensively studied attack surface in adversarial machine learning. </center>
+
+</br>
+
 
 ### Phase three: deployment
 
@@ -82,8 +94,13 @@ Deployment blends conventional software risk with AI specific risk. Insecure API
 
  The OWASP Top 10 for LLM Applications ranks prompt injection as the single highest severity vulnerability class in production LLM systems today. Command injection is the more familiar cousin: when a model's output gets translated directly into a system command or database query, an attacker can smuggle in operating system commands or SQL statements that execute with whatever privileges the AI application's runtime identity carries.
 
-![Deployment and integration phase attack surface, including API and endpoint vulnerabilities, software and library exploits, injection attacks, and infrastructure and platform attacks](images/figure-5-deployment-phase.jpg)
-*Deployment is where AI specific risk and conventional application security risk overlap, which means it needs both kinds of defenses at once.*
+ </br>
+
+<center><img src="images/figure-5-deployment-phase.jpg" alt="drawing" width="450"/></center>
+<center>Figure 4: Deployment is where AI specific risk and conventional application security risk overlap, which means it needs both kinds of defenses at once. </center>
+
+</br>
+
 
 ## Three Real-Time Deployment Cases 
 
