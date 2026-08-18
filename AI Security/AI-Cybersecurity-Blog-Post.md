@@ -66,7 +66,7 @@ Training infrastructure has its own version of model inversion, where an attacke
 
 </br>
 
-<center><img src="images/figure-2-training-dataflow.jpg" alt="drawing" width="450"/></center>
+<center><img src="images/figure-1-training-phase.png" alt="drawing" width="300"/></center>
 <center>Figure 2: Corruption introduced during data collection or training does not stay isolated. It flows directly into the models that inference servers ultimately serve to production. </center>
 
 </br>
@@ -82,7 +82,7 @@ No complete defense against adversarial examples exists today, but several mitig
 
 </br>
 
-<center><img src="images/figure-4-inference-phase.jpg" alt="drawing" width="450"/></center>
+<center><img src="images/figure-4-inference-phase.jpg" alt="drawing" width="300"/></center>
 <center>Figure 3: Once a model is serving live predictions, it is exposed to anyone who can send it an input, which is what makes inference the most extensively studied attack surface in adversarial machine learning. </center>
 
 </br>
@@ -96,7 +96,7 @@ Deployment blends conventional software risk with AI specific risk. Insecure API
 
  </br>
 
-<center><img src="images/figure-5-deployment-phase.jpg" alt="drawing" width="450"/></center>
+<center><img src="images/figure-5-deployment-phase.jpg" alt="drawing" width="300"/></center>
 <center>Figure 4: Deployment is where AI specific risk and conventional application security risk overlap, which means it needs both kinds of defenses at once. </center>
 
 </br>
