@@ -29,9 +29,12 @@ A useful way to picture this is to imagine a large hospital instead of a single,
 
 That mechanism sits at the heart of the system, and it is called a gating network, or router. You can think of the router as the model's brain in miniature: its entire job is to look at an incoming piece of data and decide which expert, or combination of experts, is best suited to handle it.
 
-<br>
+</br>
 
-![A router (gating network) connecting to a team of specialist expert sub-networks](fig1_router_experts.png)
+<center><img src="fig1_router_experts.png" alt="drawing" width="550"/></center>
+<center>Figure 1: A router (gating network) connecting to a team of specialist expert sub-networks. </center>
+
+</br>
 
 Nothing about this arrangement is magical on its own. Committees of models, ensembles, and specialist sub-networks have existed in machine learning for a long time. What makes Mixture of Experts genuinely important for modern large language models is exactly how the router makes its decisions, and just as importantly, what that routing decision buys you in terms of computational cost. We will get to that shortly. First, let's put the intuition above into a more precise, formal picture.
 
@@ -41,9 +44,13 @@ Underneath the specialist-hospital analogy is a fairly clean piece of mathematic
 
 Here is the block diagram version of the architecture. An input, call it $\pmb{x}$, is passed to every expert in the model, each of which is a separate function parameterized by its own set of weights, written as $\pmb{\theta}_1, \pmb{\theta}_2$, all the way through $\pmb{\theta}_K$ for $K$ experts. Each expert produces its own output based on $\pmb{x}$. Those outputs are not simply averaged or summed together directly. Instead, each one is scaled by a weight before it is combined with the others.
 
-<br>
+</br>
 
-![Mixture of Experts block diagram showing experts, gating network, weighted outputs, and summation](fig2_block_diagram.png)
+<center><img src="fig2_block_diagram.png" alt="drawing" width="550"/></center>
+<center>Figure 2: Mixture of Experts block diagram showing experts, gating network, weighted outputs, and summation. </center>
+
+</br>
+
 
 Those scaling weights come from the gating network, and this is the detail that makes the whole system work. The output of each expert is weighted according to the outputs of the gating network, and critically, those weights are themselves functions of the input. In the diagram above, the gating functions are written as $g_k(\pmb{x})$ for $k$ running from $1$ to $K$, and each one controls how much importance a particular expert should have toward the model's final decision for that specific input.
 
@@ -57,9 +64,12 @@ The block diagram is precise, but it can still feel abstract without a concrete 
 
 First, the model breaks down your input into individual tokens. Rather than treating the whole sentence as a single unit, it splits the sentence into smaller pieces, roughly: "What," "is," "the," "capital," "of," "France," and "?". Each of these tokens will be routed individually, not the sentence as a whole.
 
-<br>
+</br>
 
-![Tokenization and routing example for the question about the capital of France](fig3_routing_example.png)
+<center><img src="fig3_routing_example.png" alt="drawing" width="550"/></center>
+<center>Figure 3: Tokenization and routing example for the question about the capital of France. </center>
+
+</br>
 
 For each token, the model decides which expert or experts are more relevant to that specific piece of text. It does not send every token to every expert. Instead, it chooses one, or a small handful, for each token. In our example, when the router sees the token for "France," it might specifically trigger the expert associated with geography, since that expert has learned, over the course of training, to specialize in exactly this kind of content: place names, countries, and geographic relationships. Meanwhile, a token like "is" might instead lean on a more general-purpose or grammar-oriented expert, since it carries less specialized meaning on its own.
 
@@ -81,9 +91,12 @@ Each expert in an MoE model has its own weight parameters, just like any neural 
 
 Consider the comparison between a traditional dense model with, say, 100 billion parameters, and a Mixture of Experts model. With Mixture of Experts, the total number of model parameters can be enormous, potentially far larger than that dense 100-billion-parameter baseline, but only a fraction of those parameters are actually active at any given time.
 
-<br>
+</br>
 
-![Comparison of a traditional dense model where every parameter activates, versus a Mixture of Experts model where only a small fraction of experts activate per input](fig4_dense_vs_moe.png)
+<center><img src="fig4_dense_vs_moe.png" alt="drawing" width="550"/></center>
+<center>Figure 4: Comparison of a traditional dense model where every parameter activates, versus a Mixture of Experts model where only a small fraction of experts activate per input. </center>
+
+</br>
 
 Here is the important structural detail: all of the experts have their own number of parameters, and traditionally, each of those contributes to the total sum of parameters across the whole model. But for any given input, only a subset of these experts is actually used. That means the parameters belonging to whichever experts were selected are the only ones doing work for that particular piece of input. The rest of the model, all those other experts sitting idle for this particular token, contributes nothing to the computation and costs nothing in terms of processing time.
 
