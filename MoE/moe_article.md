@@ -36,13 +36,14 @@ That mechanism sits at the heart of the system, and it is called a gating networ
 
 </br>
 
+
 Nothing about this arrangement is magical on its own. Committees of models, ensembles, and specialist sub-networks have existed in machine learning for a long time. What makes Mixture of Experts genuinely important for modern large language models is exactly how the router makes its decisions, and just as importantly, what that routing decision buys you in terms of computational cost. We will get to that shortly. First, let's put the intuition above into a more precise, formal picture.
 
 ## Formalizing the Idea: The Block Diagram
 
 Underneath the specialist-hospital analogy is a fairly clean piece of mathematics. The core idea behind Mixture of Experts is combining several learning models together to form a better learner, and to boost overall performance by exploiting each one's individual characteristics, rather than forcing one network to be good at everything.
 
-Here is the block diagram version of the architecture. An input, call it $\pmb{x}$, is passed to every expert in the model, each of which is a separate function parameterized by its own set of weights, written as $\pmb{\theta}_1, \pmb{\theta}_2$, all the way through $\pmb{\theta}_K$ for $K$ experts. Each expert produces its own output based on $\pmb{x}$. Those outputs are not simply averaged or summed together directly. Instead, each one is scaled by a weight before it is combined with the others.
+Here is the block diagram version of the architecture. An input, call it $\mathbf{x}$, is passed to every expert in the model, each of which is a separate function parameterized by its own set of weights, written as $\theta_1, \theta_2$, all the way through $\theta_K$ for $K$ experts. Each expert produces its own output based on $\mathbf{x}$. Those outputs are not simply averaged or summed together directly. Instead, each one is scaled by a weight before it is combined with the others.
 
 </br>
 
@@ -52,11 +53,12 @@ Here is the block diagram version of the architecture. An input, call it $\pmb{x
 </br>
 
 
-Those scaling weights come from the gating network, and this is the detail that makes the whole system work. The output of each expert is weighted according to the outputs of the gating network, and critically, those weights are themselves functions of the input. In the diagram above, the gating functions are written as $g_k(\pmb{x})$ for $k$ running from $1$ to $K$, and each one controls how much importance a particular expert should have toward the model's final decision for that specific input.
 
-This has an important consequence: the weighting is not fixed. It changes dynamically depending on what $\pmb{x}$ actually is. For one input, the gating network might put almost all of its weight on expert 3. For a completely different input, it might spread weight across experts 1, 4, and 7 instead. The final output, $y$, is simply the weighted sum of every expert's output, using those input-dependent gating weights.
+Those scaling weights come from the gating network, and this is the detail that makes the whole system work. The output of each expert is weighted according to the outputs of the gating network, and critically, those weights are themselves functions of the input. In the diagram above, the gating functions are written as $g_k(\mathbf{x})$ for $k$ running from $1$ to $K$, and each one controls how much importance a particular expert should have toward the model's final decision for that specific input.
 
-Both halves of this system are learned together, not designed by hand. The weights $g_k(\pmb{x})$ are optimally tuned during the training phase, along with the full set of parameters $\pmb{\theta}_k$ for every expert $k$, so the gating network and the experts are trained jointly, learning simultaneously how to divide up the problem and how to solve each piece of it.
+This has an important consequence: the weighting is not fixed. It changes dynamically depending on what $\mathbf{x}$ actually is. For one input, the gating network might put almost all of its weight on expert 3. For a completely different input, it might spread weight across experts 1, 4, and 7 instead. The final output, $y$, is simply the weighted sum of every expert's output, using those input-dependent gating weights.
+
+Both halves of this system are learned together, not designed by hand. The weights $g_k(\mathbf{x})$ are optimally tuned during the training phase, along with the full set of parameters $\theta_k$ for every expert $k$, so the gating network and the experts are trained jointly, learning simultaneously how to divide up the problem and how to solve each piece of it.
 
 ## Walking Through an Example: "What Is the Capital of France?"
 
@@ -70,6 +72,7 @@ First, the model breaks down your input into individual tokens. Rather than trea
 <center>Figure 3: Tokenization and routing example for the question about the capital of France. </center>
 
 </br>
+
 
 For each token, the model decides which expert or experts are more relevant to that specific piece of text. It does not send every token to every expert. Instead, it chooses one, or a small handful, for each token. In our example, when the router sees the token for "France," it might specifically trigger the expert associated with geography, since that expert has learned, over the course of training, to specialize in exactly this kind of content: place names, countries, and geographic relationships. Meanwhile, a token like "is" might instead lean on a more general-purpose or grammar-oriented expert, since it carries less specialized meaning on its own.
 
@@ -97,6 +100,7 @@ Consider the comparison between a traditional dense model with, say, 100 billion
 <center>Figure 4: Comparison of a traditional dense model where every parameter activates, versus a Mixture of Experts model where only a small fraction of experts activate per input. </center>
 
 </br>
+
 
 Here is the important structural detail: all of the experts have their own number of parameters, and traditionally, each of those contributes to the total sum of parameters across the whole model. But for any given input, only a subset of these experts is actually used. That means the parameters belonging to whichever experts were selected are the only ones doing work for that particular piece of input. The rest of the model, all those other experts sitting idle for this particular token, contributes nothing to the computation and costs nothing in terms of processing time.
 
